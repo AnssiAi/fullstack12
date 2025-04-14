@@ -5,8 +5,8 @@ const router = express.Router();
 
 /* GET todos statistics. */
 router.get('/statistics', async (_, res) => {
-  const statistics = await getAsync('statistics');
-  res.send(JSON.parse(statistics));
+  const statistics = parseInt(await getAsync('statistics'));
+  res.send({ added_notes: statistics });
 });
 
 /* GET todos listing. */
@@ -21,8 +21,8 @@ router.post('/', async (req, res) => {
     text: req.body.text,
     done: false,
   });
-  const docs = await Todo.find({});
-  await setAsync('statistics', JSON.stringify({ added_notes: docs.length }));
+  const statistics = parseInt(await getAsync('statistics')) || 0;
+  await setAsync('statistics', statistics + 1);
   res.send(todo);
 });
 
