@@ -1,0 +1,26 @@
+Script started on 2025-04-14 16:06:16+03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="102" LINES="51"]
+[?2004h]0;fa_sa@LAPTOP-FBDBSKPH: ~/fullstack12/part12-containers-applications/todo-app/todo-backend[01;32mfa_sa@LAPTOP-FBDBSKPH[00m:[01;34m~/fullstack12/part12-containers-applications/todo-app/todo-backend[00m$ exitdocker exec -it todo-backend-redis-1 bash
+[?2004l[?2004hroot@e4ca7d4ba089:/data# exitredis-cli GET "statistics"[26@SET "statistics" "{\"added_notes\": 9001}"root@e4ca7d4ba089:/data# redis-cli [26PGET "statistics"[10PKEYS *
+[?2004l1) "statistics"
+[?2004hroot@e4ca7d4ba089:/data# redis-cli KEYS *exit[Kredis-cli GET "statistics"
+[?2004l"1"
+[?2004hroot@e4ca7d4ba089:/data# redis-cli GET "statistics"[10PKEYS *exit[Kredis-cli GET "statistics"[26@SET "statistics" "{\"added_notes\": 9001}""                         9001" [1@"9001"
+[?2004lOK
+[?2004hroot@e4ca7d4ba089:/data# redis-cli SET "statistics" "9001"[7PGET "statistics"
+[?2004l"9001"
+[?2004hroot@e4ca7d4ba089:/data# redis-cli GET "statistics"
+[?2004l"9002"
+[?2004hroot@e4ca7d4ba089:/data# redis-cli GET "statistics"ET[1P[1P[1P[1@D[1@E[1@L "statistics"
+[?2004l(integer) 1
+[?2004hroot@e4ca7d4ba089:/data# redis-cli DEL "statistics"GET "statistics"[7@SET "statistics" "9001"[7PGET "statistics"[10PKEYS *
+[?2004l(empty array)
+[?2004hroot@e4ca7d4ba089:/data# redis-cli KEYS *
+[?2004l1) "statistics"
+[?2004hroot@e4ca7d4ba089:/data# redis-cli KEYS *DEL "statistics"GET "statistics"
+[?2004l"1"
+[?2004hroot@e4ca7d4ba089:/data# exit
+[?2004lexit
+[?2004h]0;fa_sa@LAPTOP-FBDBSKPH: ~/fullstack12/part12-containers-applications/todo-app/todo-backend[01;32mfa_sa@LAPTOP-FBDBSKPH[00m:[01;34m~/fullstack12/part12-containers-applications/todo-app/todo-backend[00m$ exit
+[?2004lexit
+
+Script done on 2025-04-14 16:10:15+03:00 [COMMAND_EXIT_CODE="0"]
