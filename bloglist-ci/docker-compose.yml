@@ -1,0 +1,49 @@
+services:
+  blog-mongo-prod:
+    image: mongo
+    container_name: blog-mongo-prod
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: blog_database
+    volumes:
+      - ./BlogListApp/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - ./mongo_data:/data/db
+  server:
+    image: BlogListApp/bloglist-server-prod
+    build:
+      context: ./BlogListApp
+      dockerfile: Dockerfile
+    volumes:
+      - ./BlogListApp:/usr/src/app
+      - /usr/src/app/node_modules
+    container_name: blog-server-prod
+    environment:
+      - MONGODB_URI=mongodb://blog_username:blog_password@blog-mongo-prod:27017/blog_database
+      - PORT=3003
+      - SECRET=TamaOnSalaisuus
+    depends_on:
+      - blog-mongo-prod
+  app:
+    image: BlogListFront/bloglist-app-prod
+    build:
+      context: ./BlogListFront
+      dockerfile: Dockerfile
+    volumes:
+      - ./BlogListFront:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3000:80
+    container_name: blog-front-prod
+    depends_on:
+      - server
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: blog-production-proxy
+    depends_on:
+      - server
+      - app
